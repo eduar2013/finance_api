@@ -14,4 +14,6 @@ public interface LoanPersistence {
     Mono<Loan> save(Loan loan);
 
     Mono<Loan> findById(String id);
+
+    Mono<Void> delete(Loan loan);
 }

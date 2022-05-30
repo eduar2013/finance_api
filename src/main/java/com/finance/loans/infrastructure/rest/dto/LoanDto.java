@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -42,7 +44,8 @@ public class LoanDto {
         Loan loan = new Loan();
         BeanUtils.copyProperties(this, loan);
 
-        loan.setPayments(payments.stream().map(PaymentDto::paymentDtoToPayment).collect(Collectors.toList()));
+
+        loan.setPayments(Optional.ofNullable(payments).orElse(Collections.emptyList()).stream().map(PaymentDto::paymentDtoToPayment).collect(Collectors.toList()));
         return loan;
     }
 }

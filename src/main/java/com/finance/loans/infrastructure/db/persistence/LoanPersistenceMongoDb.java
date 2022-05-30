@@ -33,4 +33,9 @@ public class LoanPersistenceMongoDb implements LoanPersistence {
         return loanRepository.findById(id).map(LoanEntity::toLoan);
     }
 
+    @Override
+    public Mono<Void> delete(Loan loan) {
+        LoanEntity loanEntity = new LoanEntity(loan);
+        return loanRepository.delete(loanEntity);
+    }
 }
