@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/finance/api/v1/payment")
@@ -29,6 +30,7 @@ public class PaymentResource {
         return findLoanService.findById(idLoan).flatMap(l ->
         {
             l.getPayments().add(paymentDto.paymentDtoToPayment());
+            l.setLastUpdateDate(LocalDateTime.now());
             return saveLoanService.save(l);
         }).map(LoanDto::new).map(p -> ResponseEntity
                 .created(URI.create("api/v1/payment/"))
