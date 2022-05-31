@@ -24,6 +24,9 @@ public class LoanEntity{
     @Field(name = "initial_value")
     private double initialValue;
 
+    @Field(name = "installment_value")
+    private double installmentValue;
+
     private String bank;
 
    @Field(name = "disbursement_date")
